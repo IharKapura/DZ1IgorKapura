@@ -15,8 +15,8 @@ def write_file(func_to_write):
         func_to_write(name_file, name_data)
     return func_write
 
-
-def info_computer():
+@write_file
+def info_computer(name_file, name_data):
     ram = psutil.virtual_memory()
     ram_data.update(total_ram = ram.total,
                     used_ram = ram.used,
@@ -43,7 +43,10 @@ def info_computer():
                 max_freq = data_CPU.max)
 
 
-info_computer()
+info_computer('ram_data.json',ram_data)
+info_computer('disk.json',disk)
+info_computer('virtual_memory.json',V_memory)
+info_computer('CPU.json',CPU)
 
 
 def print_info():
@@ -85,12 +88,3 @@ def write_file_all_info():
         json.dump(to_file_json, file)
 
 write_file_all_info()  
-
-
-@write_file
-def write_data_in_file(name_file, name_data):
-    print( 'All GOOD! data written to file:', name_file)
-write_data_in_file('ram_data.json',ram_data)
-write_data_in_file('disk.json',disk)
-write_data_in_file('virtual_memory.json',V_memory)
-write_data_in_file('CPU.json',CPU)
