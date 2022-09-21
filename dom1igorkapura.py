@@ -34,7 +34,7 @@ def info_computer(name_file, name_data):
                 
     
     data_memory = psutil.virtual_memory()
-    V_memory.update( total = data_memory.total,
+    V_memory.update(total = data_memory.total,
                     available = data_memory.available)
     
                   
@@ -42,12 +42,46 @@ def info_computer(name_file, name_data):
     CPU.update(current_freq = data_CPU.current,
                 min_freq = data_CPU.min,
                 max_freq = data_CPU.max)
+    
+    return disk, ram_data, CPU, V_memory
 
 
-info_computer('ram_data.json',ram_data)
+info_computer('ram_data1.json',ram_data)
 info_computer('disk.json',disk)
 info_computer('virtual_memory.json',V_memory)
 info_computer('CPU.json',CPU)
+
+
+def change_info():
+    disk_c = ("DISK C:",
+            "| Total: " + str(int((disk["total_disk"])/ (1024**3))) + " GB",
+            "| Used: " + str(int((disk["used_disk"])/ (1024**3))) + " GB",
+            "| Free: " + str(int((disk["free_disk"])/ (1024**3))) + " GB",
+            "| Percent: " + str(disk["useddisk_percent"]) + " %",)
+    
+ 
+    _cpu = ("Data CPU:",
+            "| Cerrent Frequency: " + str(CPU["current_freq"]) + " GHz",
+            "| MIN Frequency: " + str(CPU["min_freq"]) + " GHz",
+            "| MAX Frequency: " + str(CPU["max_freq"]) + " GHz")
+
+
+    _ram_d = ("RAM:",
+            "| Total Memory: " + str(int((ram_data["total_ram"])/(1024**3))) + " GB",
+            "| Used Memory: " + str(int((ram_data["used_ram"])/(1024**3))) + " GB",
+            "| Percentage Employed: " + str(ram_data["percent_ram"]) + " %",
+            "| Available Memory: " + str(int((ram_data["available_ram"])/(1024**3))) +  " GB",
+            "| Free Memory: " + str(int((ram_data["free_ram"])/(1024**3))) + " GB")
+
+
+    _mem = ("VIRTUAL_MEMORY: ",
+            "| USED: " + str(int((V_memory["total"])/(1024**3))) + " GB",
+            "| FREE: " + str(int((V_memory["available"])/(1024**3))) + " GB")
+
+    return disk_c, _ram_d, _cpu, _mem
+
+
+change_info()
 
 
 def print_info():
@@ -75,16 +109,15 @@ def print_info():
     print("VIRTUAL_MEMORY: ",
             "| USED: " + str(int((V_memory["total"])/(1024**3))) + " GB",
             "| FREE: " + str(int((V_memory["available"])/(1024**3))) + " GB", sep = '\n')
-  
+
 
 print_info()
 
 
-def write_file_all_info():
-    to_file_json = (disk, ram_data,CPU,V_memory)
+def write_all_info():    
+    to_file_json = change_info()
 
-    with open('data_info_all.json', 'w') as file:
+    with open('data_infoproba.json', 'w') as file:
         json.dump(to_file_json, file)
 
-
-write_file_all_info()  
+write_all_info()
