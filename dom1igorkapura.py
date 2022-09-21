@@ -15,6 +15,7 @@ def write_file(func_to_write):
         func_to_write(name_file, name_data)
     return func_write
 
+
 @write_file
 def info_computer(name_file, name_data):
     ram = psutil.virtual_memory()
@@ -76,8 +77,6 @@ def print_info():
             "| FREE: " + str(int((V_memory["available"])/(1024**3))) + " GB", sep = '\n')
   
 
-
-
 print_info()
 
 
@@ -86,5 +85,6 @@ def write_file_all_info():
 
     with open('data_info_all.json', 'w') as file:
         json.dump(to_file_json, file)
+
 
 write_file_all_info()  
