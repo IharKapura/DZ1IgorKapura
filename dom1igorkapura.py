@@ -50,20 +50,20 @@ info_computer('CPU.json',CPU)
 
 
 def print_info():
-    disk_c = print("DISK C:",
+    print("DISK C:",
             "| Total: " + str(int((disk["total_disk"])/ (1024**3))) + " GB",
             "| Used: " + str(int((disk["used_disk"])/ (1024**3))) + " GB",
             "| Free: " + str(int((disk["free_disk"])/ (1024**3))) + " GB",
             "| Percent: " + str(disk["useddisk_percent"]) + " %", sep = '\n')
     
  
-    _cpu = print("Data CPU:",
+    print("Data CPU:",
             "| Cerrent Frequency: " + str(CPU["current_freq"]) + " GHz",
             "| MIN Frequency: " + str(CPU["min_freq"]) + " GHz",
             "| MAX Frequency: " + str(CPU["max_freq"]) + " GHz", sep = '\n')
 
 
-    _ram_d = print("RAM:",
+    print("RAM:",
             "| Total Memory: " + str(int((ram_data["total_ram"])/(1024**3))) + " GB",
             "| Used Memory: " + str(int((ram_data["used_ram"])/(1024**3))) + " GB",
             "| Percentage Employed: " + str(ram_data["percent_ram"]) + " %",
@@ -71,11 +71,11 @@ def print_info():
             "| Free Memory: " + str(int((ram_data["free_ram"])/(1024**3))) + " GB", sep = '\n')
 
 
-    _mem = print("VIRTUAL_MEMORY: ",
+    print("VIRTUAL_MEMORY: ",
             "| USED: " + str(int((V_memory["total"])/(1024**3))) + " GB",
             "| FREE: " + str(int((V_memory["available"])/(1024**3))) + " GB", sep = '\n')
   
-    return disk_c, _ram_d, _cpu, _mem
+
 
 
 print_info()
